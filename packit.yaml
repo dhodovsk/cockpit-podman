@@ -1,8 +1,10 @@
 specfile_path: cockpit-podman.spec
-synced_files:
-  - cockpit-podman.spec
-upstream_project_name: cockpit-podman
-downstream_package_name: cockpit-podman
 actions:
-  post-upstream-clone: make cockpit-podman.spec
   create-archive: make dist-gzip
+  post-upstream-clone: make cockpit-podman.spec
+jobs:
+- job: copr_build
+  metadata:
+    targets:
+    - fedora-all-x86_64
+  trigger: pull_request
